@@ -1,5 +1,5 @@
-import "./styles.scss"; // @TODO remove
-import Modal from "./Modal";
+import Modal from "./templates/Modal";
+import Fonts from "./templates/Fonts";
 
 declare global {
     interface Window {
@@ -11,10 +11,14 @@ export type Coords = { x: number, y: number };
 
 class Datepicker {
     element: HTMLElement;
+
+    fonts: Fonts;
     isShow: boolean;
     modal: Modal;
 
     constructor(element: HTMLElement) {
+        this.fonts = new Fonts();
+
         this.element = element;
         this.isShow = false;
         this.modal = new Modal(this.getCoords());
