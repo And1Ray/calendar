@@ -2,12 +2,20 @@ export default class ArrowUp {
     public element: HTMLElement;
 
     constructor() {
-        this.createElement();
+        this.init();
     }
 
-    public createElement(): void {
-        const newElement = document.createElement('div');
-        newElement.style.cssText = `
+    private init(): void {
+        this.createElement();
+        this.setStyles();
+    }
+
+    private createElement(): void {
+        this.element = document.createElement('div');
+    }
+
+    private setStyles(): void {
+        this.element.style.cssText = `
             display: inline-block;
             cursor: pointer;
             width: 10px;
@@ -19,7 +27,5 @@ export default class ArrowUp {
             margin-bottom: -4px;
             transform: rotate(-45deg);
         `;
-
-        this.element = newElement;
     }
 }

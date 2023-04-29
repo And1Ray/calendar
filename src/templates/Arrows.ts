@@ -10,15 +10,19 @@ export default class Arrows {
         this.arrowUp = new ArrowUp();
         this.arrowDown = new ArrowDown();
 
+        this.init();
+    }
+
+    private init(): void {
         this.createElement();
+        this.insertElements();
     }
 
-    public createElement(): void {
-        const newElement = document.createElement('div');
-        this.element = newElement;
+    private createElement(): void {
+        this.element = document.createElement('div');
     }
 
-    public insertElements(): void {
+    private insertElements(): void {
         this.element.appendChild(this.arrowUp.element);
         this.element.appendChild(this.arrowDown.element);
     }

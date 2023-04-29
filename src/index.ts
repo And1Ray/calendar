@@ -11,7 +11,6 @@ export type Coords = { x: number, y: number };
 
 class Datepicker {
     element: HTMLElement;
-
     fonts: Fonts;
     isShow: boolean;
     modal: Modal;

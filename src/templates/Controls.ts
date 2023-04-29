@@ -10,12 +10,26 @@ export default class Controls {
         this.moveLevelsButton = new MoveLevelsButton();
         this.arrows = new Arrows();
 
-        this.createElement();
+        this.init();
     }
 
-    public createElement(): void {
-        const newElement = document.createElement('div');
-        newElement.style.cssText = `
+    private init(): void {
+        this.createElement();
+        this.setStyles();
+        this.insertElements();
+    }
+
+    private createElement(): void {
+        this.element = document.createElement('div');
+    }
+
+    private insertElements(): void {
+        this.element.appendChild(this.moveLevelsButton.element);
+        this.element.appendChild(this.arrows.element);
+    }
+
+    private setStyles(): void {
+        this.element.style.cssText = `
             color: #B7B7B7;
             height: 45px;
             display: flex;
@@ -23,14 +37,5 @@ export default class Controls {
             align-items: center;
             padding: 0 26px;
         `;
-
-        this.element = newElement;
-    }
-
-    public insertElements(): void {
-        this.element.appendChild(this.moveLevelsButton.element);
-        this.element.appendChild(this.arrows.element);
-
-        this.arrows.insertElements();
     }
 }

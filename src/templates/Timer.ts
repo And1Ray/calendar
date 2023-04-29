@@ -2,18 +2,28 @@ export default class Timer {
     public element: HTMLElement;
 
     constructor() {
-        this.createElement();
+        this.init();
     }
 
-    public createElement(): void {
-        const newElement = document.createElement('div');
-        newElement.textContent = '21:33:26';
-        newElement.style.cssText = `
+    private init(): void {
+        this.createElement();
+        this.setStyles();
+        this.setContent();
+    }
+
+    private createElement(): void {
+        this.element = document.createElement('div');
+    }
+
+    private setContent(): void {
+        this.element.textContent = '21:33:26';
+    }
+
+    private setStyles(): void {
+        this.element.style.cssText = `
             width: 100%;
             font-size: 36px;
             color: #E5E5E5;
         `;
-
-        this.element = newElement;
     }
 }

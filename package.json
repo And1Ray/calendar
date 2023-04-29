@@ -1,6 +1,6 @@
 {
-  "name": "datepicker",
-  "version": "0.0.4",
+  "name": "power_datepicker",
+  "version": "0.0.5",
   "description": "",
   "main": "index.js",
   "module": "commonjs",
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/And1Ray/datepicker.git"
+    "url": "git+https://github.com/And1Ray/calendar.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/And1Ray/datepicker/issues"
+    "url": "https://github.com/And1Ray/calendar/issues"
   },
-  "homepage": "https://github.com/And1Ray/datepicker#readme",
+  "homepage": "https://github.com/And1Ray/calendar#readme",
   "devDependencies": {
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.3",

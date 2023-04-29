@@ -2,17 +2,27 @@ export default class MoveLevelsButton {
     public element: HTMLElement;
 
     constructor() {
+        this.init();
+    }
+
+    private init() {
         this.createElement();
+        this.setStyles();
+        this.setContent();
     }
 
     public createElement(): void {
-        const newElement = document.createElement('div');
-        newElement.textContent = 'Апрель 2023';
-        newElement.style.cssText = `
+        this.element = document.createElement('div');
+    }
+
+    private setContent(): void {
+        this.element.textContent = 'Апрель 2023';
+    }
+
+    private setStyles(): void {
+        this.element.style.cssText = `
             font-size: 18px;
             cursor: pointer;
         `;
-
-        this.element = newElement;
     }
 }
