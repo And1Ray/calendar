@@ -1,4 +1,4 @@
-export default class Date {
+export default class MoveLevelsButton {
     public element: HTMLElement;
 
     constructor() {
@@ -7,11 +7,9 @@ export default class Date {
 
     public createElement(): void {
         const newElement = document.createElement('div');
-        newElement.textContent = '1 апреля 2023 г.'
+        newElement.textContent = 'Апрель 2023';
         newElement.style.cssText = `
-            width: 100%;
-            font-size: 16px;
-            color: #9AB3CA;
+            font-size: 18px;
             cursor: pointer;
         `;
 

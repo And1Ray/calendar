@@ -16,9 +16,9 @@ export default class Header {
     public createElement(): void {
         const newElement = document.createElement('div');
         newElement.style.cssText = `
-            border-bottom: 1px solid white;
-            padding-top: 27px;
-            padding-left: 23px;
+            border-bottom: 1px solid #575858;
+            padding-top: 26px;
+            padding-left: 26px;
             padding-bottom: 23px;
         `;
 
