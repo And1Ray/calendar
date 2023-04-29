@@ -1,14 +1,17 @@
 import {Coords} from '../index'
 import Header from "./Header";
+import Controls from "./Controls";
 
 export default class Modal {
     private element?: HTMLElement;
     private header: Header;
+    private controls: Controls;
     private coords?: Coords;
 
     constructor(coords?: Coords) {
         this.coords = coords;
         this.header = new Header();
+        this.controls = new Controls();
     }
 
     private createElement(): HTMLElement {
@@ -44,7 +47,10 @@ export default class Modal {
     private show(): void {
         this.element = this.createElement();
         this.element.appendChild(this.header.element);
+        this.element.appendChild(this.controls.element);
+
         this.header.insertElements();
+        this.controls.insertElements();
 
         document.body.appendChild(this.element);
     }
