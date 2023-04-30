@@ -1,37 +1,23 @@
 import Cell from "./Cell";
+import HTMLService from "../services/HTMLService";
 
-export default class Table {
-    public element: HTMLElement;
+export default class Table extends  HTMLService {
     private cells: HTMLElement[] = [];
 
     constructor() {
+        super();
+
         for (let i = 1; i <= 49; i++) {
-            this.cells.push(new Cell(String(i)).element);
+            this.cells.push(new Cell(String(i)).getElement);
         }
 
-        this.init();
-    }
-
-    private init(): void {
-        this.createElement();
-        this.setStyles();
-        this.insertElements();
-    }
-
-    private createElement(): void {
-        this.element = document.createElement('div');
-    }
-
-    private setStyles(): void {
-        this.element.style.cssText = `
+        this.setStyles(`
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
-        `;
-    }
+        `);
 
-    private insertElements(): void {
-        this.cells.forEach(item => this.element.appendChild(item));
+        this.insertElements(this.cells);
     }
 }

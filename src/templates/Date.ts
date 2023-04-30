@@ -1,30 +1,16 @@
-export default class Date {
-    public element: HTMLElement;
+import HTMLService from "../services/HTMLService";
 
+export default class Date extends HTMLService {
     constructor() {
-        this.init();
-    }
+        super();
 
-    private init(): void {
-        this.createElement();
-        this.setStyles();
-        this.setContent();
-    }
-
-    public createElement(): void {
-        this.element = document.createElement('div');
-    }
-
-    private setContent(): void {
-        this.element.textContent = '1 апреля 2023 г.'
-    }
-
-    private setStyles(): void {
-        this.element.style.cssText = `
+        this.setStyles(`
             width: 100%;
             font-size: 16px;
             color: #9AB3CA;
             cursor: pointer;
-        `;
+        `);
+
+        this.setContent('1 апреля 2023 г.');
     }
 }

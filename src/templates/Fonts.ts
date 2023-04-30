@@ -1,4 +1,5 @@
 import jsonData from '../font.json'
+import HTMLService from "../services/HTMLService";
 
 const FONT_STYLES: string = `
             @font-face {
@@ -16,16 +17,11 @@ const FONT_STYLES: string = `
                 src: url(${jsonData.font2}) format('woff2');
             }
         `
-export default class Fonts {
-    private styleElement: HTMLStyleElement;
-
+export default class Fonts extends HTMLService {
     constructor() {
-        this.init();
-    }
+        super('style');
 
-    private init(): void {
-        this.styleElement = document.createElement('style');
-        this.styleElement.innerHTML = FONT_STYLES;
-        document.head.appendChild(this.styleElement);
+        this.getElement.innerHTML = FONT_STYLES;
+        document.head.appendChild(this.getElement);
     }
 }

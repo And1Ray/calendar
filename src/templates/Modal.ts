@@ -2,33 +2,23 @@ import {Coords} from '../index'
 import Header from "./Header";
 import Controls from "./Controls";
 import Table from "./Table";
+import HTMLService from "../services/HTMLService";
 
-export default class Modal {
-    private element: HTMLElement;
+export default class Modal extends HTMLService {
+    private coords: Coords;
     private header: Header;
     private controls: Controls;
     private table: Table;
-    private coords: Coords;
 
     constructor(coords: Coords) {
+        super();
+
         this.coords = coords;
         this.header = new Header();
         this.controls = new Controls();
         this.table = new Table();
-    }
 
-    private init(): void {
-        this.createElement();
-        this.setStyles();
-        this.insertElements();
-    }
-
-    private createElement(): void {
-        this.element = document.createElement('div');
-    }
-
-    private setStyles(): void {
-        this.element.style.cssText = `
+        this.setStyles(`
             font-family: RobotoLightDP, Arial, sans-serif;
             width: 360px;
             position: absolute;
@@ -38,18 +28,13 @@ export default class Modal {
             display: block;
             margin-top: 4px;
             padding-bottom: 26px;
-        `;
-    }
+        `);
 
-    private insertElements(): void {
-        this.element.appendChild(this.header.element);
-        this.element.appendChild(this.controls.element);
-        this.element.appendChild(this.table.element);
-        document.body.appendChild(this.element);
-    }
-
-    private removeElement(): void {
-        this.element.remove();
+        this.insertElements([
+            this.header.getElement,
+            this.controls.getElement,
+            this.table.getElement
+        ]);
     }
 
     public toggle(flag: boolean): void {
@@ -62,7 +47,7 @@ export default class Modal {
     }
 
     private show(): void {
-        this.init();
+        document.body.appendChild(this.getElement);
     }
 
     private hide(): void {

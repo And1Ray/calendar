@@ -1,29 +1,13 @@
-export default class Cell {
-    public element: HTMLElement;
+import HTMLService from "../services/HTMLService";
+
+export default class Cell extends HTMLService {
     private readonly text: string;
 
     constructor(text: string) {
+        super();
         this.text = text;
 
-        this.init();
-    }
-
-    private init(): void {
-        this.createElement();
-        this.setContent();
-        this.setStyles();
-    }
-
-    private createElement(): void {
-        this.element = document.createElement('div');
-    }
-
-    private setContent(): void {
-        this.element.textContent = this.text;
-    }
-
-    private setStyles(): void {
-        this.element.style.cssText = `
+        this.setStyles(`
             display: inline-flex;
             justify-content: center;
             align-items: center;
@@ -31,6 +15,8 @@ export default class Cell {
             width: 48px;
             height: 40px;
             color: #EFEFEF;
-        `;
+        `);
+
+        this.setContent(this.text);
     }
 }

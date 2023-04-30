@@ -1,21 +1,11 @@
-export default class ArrowDown {
-    public element: HTMLElement;
+import HTMLService from "../services/HTMLService";
+
+export default class ArrowDown extends HTMLService {
 
     constructor() {
-        this.init();
-    }
+        super();
 
-    private init(): void {
-        this.createElement();
-        this.setStyles();
-    }
-
-    private createElement(): void {
-        this.element = document.createElement('div');
-    }
-
-    private setStyles(): void {
-        this.element.style.cssText = `
+        this.setStyles(`
             display: inline-block;
             cursor: pointer;
             width: 10px;
@@ -25,6 +15,6 @@ export default class ArrowDown {
             border-left-color: #B7B7B7;
             transform: rotate(-45deg);
             margin-bottom: 4px;
-        `;
+        `);
     }
 }

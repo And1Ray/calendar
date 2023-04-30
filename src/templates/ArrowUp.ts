@@ -1,21 +1,10 @@
-export default class ArrowUp {
-    public element: HTMLElement;
+import HTMLService from "../services/HTMLService";
 
+export default class ArrowUp extends HTMLService {
     constructor() {
-        this.init();
-    }
+        super();
 
-    private init(): void {
-        this.createElement();
-        this.setStyles();
-    }
-
-    private createElement(): void {
-        this.element = document.createElement('div');
-    }
-
-    private setStyles(): void {
-        this.element.style.cssText = `
+        this.setStyles(`
             display: inline-block;
             cursor: pointer;
             width: 10px;
@@ -26,6 +15,6 @@ export default class ArrowUp {
             margin-right: 25px;
             margin-bottom: -4px;
             transform: rotate(-45deg);
-        `;
+        `);
     }
 }
