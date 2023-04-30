@@ -1,19 +1,15 @@
-export default class Timer {
-    public element: HTMLElement;
+import HTMLService from "../services/HTMLService";
 
+export default class Timer extends HTMLService {
     constructor() {
-        this.createElement();
-    }
+        super();
 
-    public createElement(): void {
-        const newElement = document.createElement('div');
-        newElement.textContent = '21:33:26';
-        newElement.style.cssText = `
+        this.setStyles(`
             width: 100%;
             font-size: 36px;
             color: #E5E5E5;
-        `;
+        `);
 
-        this.element = newElement;
+        this.setContent('21:33:26');
     }
 }

@@ -1,38 +1,40 @@
 import {Coords} from '../index'
 import Header from "./Header";
 import Controls from "./Controls";
+import Table from "./Table";
+import HTMLService from "../services/HTMLService";
 
-export default class Modal {
-    private element?: HTMLElement;
+export default class Modal extends HTMLService {
+    private coords: Coords;
     private header: Header;
     private controls: Controls;
-    private coords?: Coords;
+    private table: Table;
 
-    constructor(coords?: Coords) {
+    constructor(coords: Coords) {
+        super();
+
         this.coords = coords;
         this.header = new Header();
         this.controls = new Controls();
-    }
+        this.table = new Table();
 
-    private createElement(): HTMLElement {
-        const newElement = document.createElement('div');
-        newElement.style.cssText = `
+        this.setStyles(`
             font-family: RobotoLightDP, Arial, sans-serif;
             width: 360px;
-            height: 500px;
             position: absolute;
             background-color: #3B3C3C;
             left: ${this.coords?.x}px;
             top: ${this.coords?.y}px;
             display: block;
             margin-top: 4px;
-        `;
-        return newElement;
-    }
+            padding-bottom: 26px;
+        `);
 
-    private removeElement(): void {
-        this.element?.remove();
-        this.element = undefined;
+        this.insertElements([
+            this.header.getElement,
+            this.controls.getElement,
+            this.table.getElement
+        ]);
     }
 
     public toggle(flag: boolean): void {
@@ -45,14 +47,7 @@ export default class Modal {
     }
 
     private show(): void {
-        this.element = this.createElement();
-        this.element.appendChild(this.header.element);
-        this.element.appendChild(this.controls.element);
-
-        this.header.insertElements();
-        this.controls.insertElements();
-
-        document.body.appendChild(this.element);
+        document.body.appendChild(this.getElement);
     }
 
     private hide(): void {

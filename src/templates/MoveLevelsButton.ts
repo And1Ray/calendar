@@ -1,18 +1,14 @@
-export default class MoveLevelsButton {
-    public element: HTMLElement;
+import HTMLService from "../services/HTMLService";
 
+export default class MoveLevelsButton extends HTMLService {
     constructor() {
-        this.createElement();
-    }
+        super();
 
-    public createElement(): void {
-        const newElement = document.createElement('div');
-        newElement.textContent = 'Апрель 2023';
-        newElement.style.cssText = `
+        this.setStyles(`
             font-size: 18px;
             cursor: pointer;
-        `;
+        `);
 
-        this.element = newElement;
+        this.setContent('Апрель 2023');
     }
 }

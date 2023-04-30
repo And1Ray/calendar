@@ -1,25 +1,17 @@
 import ArrowUp from "./ArrowUp";
 import ArrowDown from "./ArrowDown";
+import HTMLService from "../services/HTMLService";
 
-export default class Arrows {
-    public element: HTMLElement;
+export default class Arrows extends HTMLService {
     private arrowUp: ArrowUp;
     private arrowDown: ArrowDown;
 
     constructor() {
+        super();
+
         this.arrowUp = new ArrowUp();
         this.arrowDown = new ArrowDown();
 
-        this.createElement();
-    }
-
-    public createElement(): void {
-        const newElement = document.createElement('div');
-        this.element = newElement;
-    }
-
-    public insertElements(): void {
-        this.element.appendChild(this.arrowUp.element);
-        this.element.appendChild(this.arrowDown.element);
+        this.insertElements([this.arrowUp.getElement, this.arrowDown.getElement]);
     }
 }
