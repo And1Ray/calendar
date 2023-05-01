@@ -1,5 +1,6 @@
 import jsonData from '../font.json'
 import HTMLService from "../services/HTMLService";
+import EventObserver from "../services/EventObserver";
 
 const FONT_STYLES: string = `
             @font-face {
@@ -18,8 +19,8 @@ const FONT_STYLES: string = `
             }
         `
 export default class Fonts extends HTMLService {
-    constructor() {
-        super('style');
+    constructor(eventObserver: EventObserver) {
+        super(eventObserver, 'style');
 
         this.getElement.innerHTML = FONT_STYLES;
         document.head.appendChild(this.getElement);

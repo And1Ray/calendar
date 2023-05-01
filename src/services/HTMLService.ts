@@ -1,7 +1,11 @@
+import EventObserver from "./EventObserver";
+
 export default abstract class HTMLService {
     private element: HTMLElement;
+    public readonly eventObserver: EventObserver;
 
-    protected constructor(tag?: string) {
+    protected constructor(eventObserver: EventObserver, tag?: string) {
+        this.eventObserver = eventObserver;
         this.setElement = document.createElement(tag || 'div');
     }
 
