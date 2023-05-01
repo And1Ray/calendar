@@ -3,6 +3,9 @@ import Header from "./Header";
 import Controls from "./Controls";
 import Table from "./Table";
 import HTMLService from "../services/HTMLService";
+import EventObserver from "../services/EventObserver";
+import EventClose from "../Events/EventClose";
+import EventOpen from "../Events/EventOpen";
 
 export default class Modal extends HTMLService {
     private coords: Coords;
@@ -10,13 +13,13 @@ export default class Modal extends HTMLService {
     private controls: Controls;
     private table: Table;
 
-    constructor(coords: Coords) {
-        super();
+    constructor(eventObserver: EventObserver, coords: Coords) {
+        super(eventObserver);
 
         this.coords = coords;
-        this.header = new Header();
-        this.controls = new Controls();
-        this.table = new Table();
+        this.header = new Header(eventObserver);
+        this.controls = new Controls(eventObserver);
+        this.table = new Table(eventObserver);
 
         this.setStyles(`
             font-family: RobotoLightDP, Arial, sans-serif;
@@ -28,6 +31,7 @@ export default class Modal extends HTMLService {
             display: block;
             margin-top: 4px;
             padding-bottom: 26px;
+            border-radius: 4px;
         `);
 
         this.insertElements([
@@ -48,9 +52,17 @@ export default class Modal extends HTMLService {
 
     private show(): void {
         document.body.appendChild(this.getElement);
+
+        this.eventObserver.dispatch(new EventOpen({
+            el: this.getElement,
+        }));
     }
 
     private hide(): void {
+        this.eventObserver.dispatch(new EventClose({
+            el: this.getElement,
+        }));
+
         this.removeElement();
     }
 }

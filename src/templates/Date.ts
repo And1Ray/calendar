@@ -1,8 +1,9 @@
 import HTMLService from "../services/HTMLService";
+import EventObserver from "../services/EventObserver";
 
 export default class Date extends HTMLService {
-    constructor() {
-        super();
+    constructor(eventObserver: EventObserver) {
+        super(eventObserver);
 
         this.setStyles(`
             width: 100%;

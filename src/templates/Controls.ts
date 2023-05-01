@@ -1,16 +1,17 @@
 import MoveLevelsButton from "./MoveLevelsButton";
 import Arrows from "./Arrows";
 import HTMLService from "../services/HTMLService";
+import EventObserver from "../services/EventObserver";
 
 export default class Controls extends HTMLService {
     private moveLevelsButton: MoveLevelsButton;
     private arrows: Arrows;
 
-    constructor() {
-        super();
+    constructor(eventObserver: EventObserver) {
+        super(eventObserver);
 
-        this.moveLevelsButton = new MoveLevelsButton();
-        this.arrows = new Arrows();
+        this.moveLevelsButton = new MoveLevelsButton(eventObserver);
+        this.arrows = new Arrows(eventObserver);
 
         this.setStyles(`
             color: #B7B7B7;

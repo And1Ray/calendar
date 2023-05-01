@@ -1,10 +1,11 @@
 import HTMLService from "../services/HTMLService";
+import EventObserver from "../services/EventObserver";
 
 export default class Cell extends HTMLService {
     private readonly text: string;
 
-    constructor(text: string) {
-        super();
+    constructor(eventObserver: EventObserver, text: string) {
+        super(eventObserver);
         this.text = text;
 
         this.setStyles(`
