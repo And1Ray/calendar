@@ -2,8 +2,8 @@ import {Coords} from '../index'
 import Header from "./Header";
 import Controls from "./Controls";
 import Table from "./Table";
-import HTMLService from "../services/HTMLService";
-import EventObserver from "../services/EventObserver";
+import HTMLService from "../Services/HTMLService";
+import EventObserver from "../Services/EventObserver";
 import EventClose from "../Events/EventClose";
 import EventOpen from "../Events/EventOpen";
 

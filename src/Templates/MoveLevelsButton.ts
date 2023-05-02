@@ -1,5 +1,5 @@
-import HTMLService from "../services/HTMLService";
-import EventObserver from "../services/EventObserver";
+import HTMLService from "../Services/HTMLService";
+import EventObserver from "../Services/EventObserver";
 
 export default class MoveLevelsButton extends HTMLService {
     constructor(eventObserver: EventObserver) {

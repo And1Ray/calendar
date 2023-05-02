@@ -1,7 +1,7 @@
 import MoveLevelsButton from "./MoveLevelsButton";
 import Arrows from "./Arrows";
-import HTMLService from "../services/HTMLService";
-import EventObserver from "../services/EventObserver";
+import HTMLService from "../Services/HTMLService";
+import EventObserver from "../Services/EventObserver";
 
 export default class Controls extends HTMLService {
     private moveLevelsButton: MoveLevelsButton;

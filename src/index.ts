@@ -1,6 +1,6 @@
-import Modal from "./templates/Modal";
-import Fonts from "./templates/Fonts";
-import EventObserver from "./services/EventObserver";
+import Modal from "./Templates/Modal";
+import Fonts from "./Templates/Fonts";
+import EventObserver from "./Services/EventObserver";
 
 declare global {
     interface Window {

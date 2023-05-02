@@ -1,6 +1,6 @@
 import jsonData from '../font.json'
-import HTMLService from "../services/HTMLService";
-import EventObserver from "../services/EventObserver";
+import HTMLService from "../Services/HTMLService";
+import EventObserver from "../Services/EventObserver";
 
 const FONT_STYLES: string = `
             @font-face {

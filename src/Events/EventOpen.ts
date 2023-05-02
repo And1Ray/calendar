@@ -1,5 +1,5 @@
 import EventNames from "./EventNames";
-import EventService from "../services/EventService";
+import EventService from "../Services/EventService";
 
 export default class EventOpen extends EventService {
     constructor(data: Object) {

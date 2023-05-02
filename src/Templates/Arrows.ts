@@ -1,7 +1,7 @@
 import ArrowUp from "./ArrowUp";
 import ArrowDown from "./ArrowDown";
-import HTMLService from "../services/HTMLService";
-import EventObserver from "../services/EventObserver";
+import HTMLService from "../Services/HTMLService";
+import EventObserver from "../Services/EventObserver";
 
 export default class Arrows extends HTMLService {
     private arrowUp: ArrowUp;
