@@ -1,6 +1,9 @@
-import Modal from "./templates/Modal";
-import Fonts from "./templates/Fonts";
-import EventObserver from "./services/EventObserver";
+import Modal from "./Templates/Modal";
+import Fonts from "./Templates/Fonts";
+import EventObserver from "./Services/EventObserver";
+import EventNames from "./Events/EventNames";
+import EventOpen from "./Events/EventOpen";
+import EventClose from "./Events/EventClose";
 
 declare global {
     interface Window {
@@ -10,8 +13,8 @@ declare global {
 
 export type Coords = { x: number, y: number };
 
-class PowerDatepicker {
-    private element: HTMLElement;
+export default class PowerDatepicker {
+    private readonly element: HTMLElement;
     private readonly eventObserver: EventObserver;
     private fonts: Fonts;
     private isShow: boolean;
@@ -23,26 +26,40 @@ class PowerDatepicker {
         this.fonts = new Fonts(this.eventObserver);
         this.element = element;
         this.isShow = false;
-        this.modal = new Modal(this.eventObserver, this.getCoords());
+        this.modal = new Modal(
+            this.eventObserver,
+            this.getCoords(),
+            this.element
+        );
 
-        this.init()
+        this.element.addEventListener(EventNames.CLICK, this.onClickByTargetElement.bind(this));
+
+        this.eventObserver.on(EventNames.OPEN, this.onOpen.bind(this));
+        this.eventObserver.on(EventNames.CLOSE, this.onClose.bind(this));
     }
 
-    private init(): void {
-        this.element.addEventListener('click', (event: MouseEvent) => {
-            event.preventDefault();
+    onClickByTargetElement(event: MouseEvent): void {
+        event.preventDefault();
 
-            if (!event.target) {
-                return;
-            }
+        if (!event.target) {
+            return;
+        }
 
-            this.isShow = !this.isShow;
-            this.modal.toggle(this.isShow);
-        });
+        this.isShow ?
+            this.eventObserver.dispatch(new EventClose({isShow: this.isShow})) :
+            this.eventObserver.dispatch(new EventOpen({isShow: this.isShow}));
+    }
+
+    private onOpen(): void {
+        this.isShow = true;
+    }
+
+    private onClose(): void {
+        this.isShow = false;
     }
 
     private getCoords(): Coords {
-        const coords = this.element.getBoundingClientRect();
+        const coords: DOMRect = this.element.getBoundingClientRect();
         return {
             y: coords.bottom,
             x: coords.left
