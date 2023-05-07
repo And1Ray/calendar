@@ -1,5 +1,7 @@
 import HTMLService from "../Services/HTMLService";
 import EventObserver from "../Services/EventObserver";
+import EventNames from "../Events/EventNames";
+import EventTimeupdate from "../Events/EventTimeupdate";
 
 export default class MoveLevelsButton extends HTMLService {
     constructor(eventObserver: EventObserver) {
@@ -10,6 +12,16 @@ export default class MoveLevelsButton extends HTMLService {
             cursor: pointer;
         `);
 
-        this.setContent('Апрель 2023');
+        this.eventObserver.on(EventNames.TIMEUPDATE, this.onTimeupdate.bind(this));
+    }
+
+    private onTimeupdate(event: EventTimeupdate): void {
+        const date = event.data.formattedDateShort;
+
+        if (!date) {
+            return;
+        }
+
+        this.setContent(date);
     }
 }

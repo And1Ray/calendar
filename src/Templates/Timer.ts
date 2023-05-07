@@ -23,8 +23,7 @@ export default class Timer extends HTMLService {
     }
 
     private onTimeupdate(event: EventTimeupdate): void {
-        const time = event.data.time;
-        console.log(time);
+        const time = event.data.formattedTime;
 
         if (!time) {
             return;
