@@ -1,5 +1,7 @@
 import HTMLService from "../Services/HTMLService";
 import EventObserver from "../Services/EventObserver";
+import EventNames from "../Events/EventNames";
+import EventTimeupdate from "../Events/EventTimeupdate";
 
 export default class Date extends HTMLService {
     constructor(eventObserver: EventObserver) {
@@ -12,6 +14,16 @@ export default class Date extends HTMLService {
             cursor: pointer;
         `);
 
-        this.setContent('1 апреля 2023 г.');
+        this.eventObserver.on(EventNames.TIMEUPDATE, this.onTimeupdate.bind(this));
+    }
+
+    private onTimeupdate(event: EventTimeupdate): void {
+        const date = event.data.formattedDateFull;
+
+        if (!date) {
+            return;
+        }
+
+        this.setContent(date);
     }
 }

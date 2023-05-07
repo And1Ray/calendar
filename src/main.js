@@ -9,11 +9,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const onOpen = (event) => {
         console.log('Open outside', event)
-        throw new Error('Uuups')
+        // throw new Error('Uuups')
     }
 
-    datepicker.addEventListener('opens', onOpen)
+    // datepicker.addEventListener('opens', onOpen)
     datepicker.addEventListener('open', onOpen)
+
+    const onTimeupdate = (event) => {
+        console.log('Timeupdate outside', event)
+    }
+
+    datepicker.addEventListener('timeupdate', onTimeupdate);
 
     // setTimeout(() => {
     //     datepicker.removeEventListener('open', onOpen)

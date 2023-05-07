@@ -13,7 +13,7 @@ declare global {
 
 export type Coords = { x: number, y: number };
 
-export default class PowerDatepicker {
+class PowerDatepicker {
     private readonly element: HTMLElement;
     private readonly eventObserver: EventObserver;
     private fonts: Fonts;
@@ -45,9 +45,9 @@ export default class PowerDatepicker {
             return;
         }
 
-        this.isShow ?
-            this.eventObserver.dispatch(new EventClose({isShow: this.isShow})) :
-            this.eventObserver.dispatch(new EventOpen({isShow: this.isShow}));
+        this.isShow
+            ? this.eventObserver.dispatch(new EventClose({isShow: this.isShow}))
+            : this.eventObserver.dispatch(new EventOpen({isShow: this.isShow}));
     }
 
     private onOpen(): void {
