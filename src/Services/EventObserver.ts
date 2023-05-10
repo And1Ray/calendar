@@ -45,6 +45,7 @@ export default class EventObserver {
 
     private getSupportedListeners(): string[] {
         return [
+            EventNames.INITED,
             EventNames.OPEN,
             EventNames.CLOSE,
             EventNames.TIMEUPDATE

@@ -6,6 +6,7 @@ import HTMLService from "../Services/HTMLService";
 import EventObserver from "../Services/EventObserver";
 import EventClose from "../Events/EventClose";
 import EventNames from "../Events/EventNames";
+import TimerService from "../Services/TimerService";
 
 export default class Modal extends HTMLService {
     private coords: Coords;
@@ -24,6 +25,7 @@ export default class Modal extends HTMLService {
 
         this.coords = coords;
         this.parentElement = parentElement;
+
         this.header = new Header(eventObserver);
         this.controls = new Controls(eventObserver);
         this.table = new Table(eventObserver);

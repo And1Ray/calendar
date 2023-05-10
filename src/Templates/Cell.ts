@@ -2,11 +2,16 @@ import HTMLService from "../Services/HTMLService";
 import EventObserver from "../Services/EventObserver";
 
 export default class Cell extends HTMLService {
-    private readonly text: string;
+    private readonly data: {name: string, day?: number | undefined, index: number, mark: string};
 
-    constructor(eventObserver: EventObserver, text: string) {
+    constructor(eventObserver: EventObserver, data: {name: string, day?: number | undefined, index: number, mark: string}) {
         super(eventObserver);
-        this.text = text;
+        this.data = data;
+
+        let color = '#777777';
+        if (this.data.mark === 'current' || this.data.mark === 'title') {
+            color = '#EFEFEF';
+        }
 
         this.setStyles(`
             display: inline-flex;
@@ -15,9 +20,10 @@ export default class Cell extends HTMLService {
             cursor: pointer;
             width: 48px;
             height: 40px;
-            color: #EFEFEF;
+            color: ${color};
+            ${this.data.mark === 'title' ? 'font-size: 14px;' : ''}
         `);
 
-        this.setContent(this.text);
+        this.data.day ? this.setContent(String(this.data.day)) : this.setContent(this.data.name);
     }
 }
