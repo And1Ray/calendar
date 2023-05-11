@@ -26,6 +26,7 @@ export default abstract class HTMLService {
     }
 
     protected insertElements(elements: HTMLElement[]): void {
+        this.getElement.innerHTML = '';
         elements.forEach((element: HTMLElement) => this.getElement.appendChild(element));
     }
 

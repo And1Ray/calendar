@@ -1,25 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
     const btn = document.getElementById('btn')
     const datepicker = new PowerDatepicker(btn);
-    console.log(datepicker)
+    // console.log(datepicker)
 
-    const h1 = document.getElementById('title')
-    const datepickerTitle = new PowerDatepicker(h1);
-    console.log(datepickerTitle)
-
-    const onOpen = (event) => {
-        console.log('Open outside', event)
-        // throw new Error('Uuups')
-    }
+    // const onOpen = (event) => {
+    //     console.log('Open outside', event)
+    //     // throw new Error('Uuups')
+    // }
 
     // datepicker.addEventListener('opens', onOpen)
-    datepicker.addEventListener('open', onOpen)
-
-    const onTimeupdate = (event) => {
-        console.log('Timeupdate outside', event)
-    }
-
-    datepicker.addEventListener('timeupdate', onTimeupdate);
+    // datepicker.addEventListener('open', onOpen)
+    //
+    // const onTimeupdate = (event) => {
+    //     console.log('Timeupdate outside', event)
+    // }
+    //
+    // datepicker.addEventListener('timeupdate', onTimeupdate);
 
     // setTimeout(() => {
     //     datepicker.removeEventListener('open', onOpen)
