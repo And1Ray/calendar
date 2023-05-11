@@ -5,7 +5,8 @@ import EventNames from "./Events/EventNames";
 import EventOpen from "./Events/EventOpen";
 import EventClose from "./Events/EventClose";
 import TimerService from "./Services/TimerService";
-import EventInited from "./Events/EventInited";
+import EventInitEnd from "./Events/EventInitEnd";
+import TableContentService from "./Services/TableContentService";
 
 declare global {
     interface Window {
@@ -19,6 +20,7 @@ class PowerDatepicker {
     private readonly element: HTMLElement;
     private readonly eventObserver: EventObserver;
     private timerService: TimerService;
+    private readonly tableContentService: TableContentService;
     private fonts: Fonts;
     private isShow: boolean;
     private modal: Modal;
@@ -26,6 +28,7 @@ class PowerDatepicker {
     constructor(element: HTMLElement) {
         this.eventObserver = new EventObserver();
         this.timerService = new TimerService(this.eventObserver);
+        this.tableContentService = new TableContentService(this.eventObserver);
 
         this.fonts = new Fonts(this.eventObserver);
         this.element = element;
@@ -33,13 +36,15 @@ class PowerDatepicker {
         this.modal = new Modal(
             this.eventObserver,
             this.getCoords(),
-            this.element
+            this.element,
+            this.tableContentService
         );
 
         this.element.addEventListener(EventNames.CLICK, this.onClickByTargetElement.bind(this));
 
-        this.eventObserver.dispatch(new EventInited({
-            cellContent: this.timerService.getCellsContent()
+        this.eventObserver.dispatch(new EventInitEnd({
+            cellContent: this.tableContentService.daysCellContent,
+            formattedDateShort: this.tableContentService.getFormattedDateShort()
         }));
 
         this.eventObserver.on(EventNames.OPEN, this.onOpen.bind(this));
@@ -54,8 +59,8 @@ class PowerDatepicker {
         }
 
         this.isShow
-            ? this.eventObserver.dispatch(new EventClose({isShow: this.isShow}))
-            : this.eventObserver.dispatch(new EventOpen({isShow: this.isShow}));
+            ? this.eventObserver.dispatch(new EventClose())
+            : this.eventObserver.dispatch(new EventOpen());
     }
 
     private onOpen(): void {

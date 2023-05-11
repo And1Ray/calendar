@@ -1,3 +1,5 @@
+import {DEFAULT_LOCALE} from "../Constants";
+
 export default class DateTimeFormatService {
     private readonly clientLocale: string;
 
@@ -12,9 +14,9 @@ export default class DateTimeFormatService {
     private getLocale(): string {
         return (
             navigator.languages.find(item => {
-                let node = item.toLowerCase().split('-');
+                let node: string[] = item.toLowerCase().split('-');
                 return node[0] === node[1];
-            }) || 'en-US'
+            }) || DEFAULT_LOCALE
         );
     }
 }
