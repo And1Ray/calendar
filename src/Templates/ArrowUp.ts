@@ -27,6 +27,6 @@ export default class ArrowUp extends HTMLService {
     }
 
     private onClick(): void {
-        this.tableContentService.prevMonthDays();
+        this.tableContentService.prevTable();
     }
 }

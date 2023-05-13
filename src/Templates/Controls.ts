@@ -11,7 +11,7 @@ export default class Controls extends HTMLService {
     constructor(eventObserver: EventObserver, tableContentService: TableContentService) {
         super(eventObserver);
 
-        this.moveLevelsButton = new MoveLevelsButton(eventObserver);
+        this.moveLevelsButton = new MoveLevelsButton(eventObserver, tableContentService);
         this.arrows = new Arrows(eventObserver, tableContentService);
 
         this.setStyles(`

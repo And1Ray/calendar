@@ -21,16 +21,5 @@ export default class Header extends HTMLService {
         `);
 
         this.insertElements([this.timer.getElement, this.date.getElement]);
-
-        this.eventObserver.on('open', this.onOpen.bind(this));
-        this.eventObserver.on('close', this.onClose.bind(this));
-    }
-
-    private onOpen(event: CustomEvent): void {
-        console.log('Header.onOpen', event);
-    }
-
-    private onClose(event: CustomEvent): void {
-        console.log('Header.onClose', event);
     }
 }

@@ -1,12 +1,12 @@
-import {CellData, Mark} from "../Interfaces";
+import {CellData, Levels, Mark} from "../Interfaces";
 import {LENGTH_DAY_CELLS, LENGTH_OF_DAYS} from "../Constants";
 import DateTimeFormatService from "./DateTimeFormatService";
 
 export default class DaysContentService {
     private dateTimeFormat: DateTimeFormatService;
 
-    constructor() {
-        this.dateTimeFormat = new DateTimeFormatService();
+    constructor(dateTimeFormat: DateTimeFormatService) {
+        this.dateTimeFormat = dateTimeFormat;
     }
 
     public getDays(currentYear: number, currentMonth: number): CellData[] {
@@ -42,7 +42,8 @@ export default class DaysContentService {
                 return {
                     name: formatter.format(date),
                     index: date.getDay(),
-                    mark: 'title'
+                    mark: 'title',
+                    level: Levels.DAYS
                 };
             });
 
@@ -59,7 +60,8 @@ export default class DaysContentService {
                 name: formatterWeekday.formatToParts(date)[0].value,
                 day: i,
                 index: date.getDay(),
-                mark
+                mark,
+                level: Levels.DAYS
             })
         }
 
