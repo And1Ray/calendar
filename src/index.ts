@@ -5,7 +5,6 @@ import EventNames from "./Events/EventNames";
 import EventOpen from "./Events/EventOpen";
 import EventClose from "./Events/EventClose";
 import TimerService from "./Services/TimerService";
-import EventInitEnd from "./Events/EventInitEnd";
 import TableContentService from "./Services/TableContentService";
 
 declare global {
@@ -29,8 +28,8 @@ class PowerDatepicker {
         this.eventObserver = new EventObserver();
         this.timerService = new TimerService(this.eventObserver);
         this.tableContentService = new TableContentService(this.eventObserver);
-
         this.fonts = new Fonts(this.eventObserver);
+
         this.element = element;
         this.isShow = false;
         this.modal = new Modal(
@@ -40,13 +39,9 @@ class PowerDatepicker {
             this.tableContentService
         );
 
+        this.tableContentService.init();
+
         this.element.addEventListener(EventNames.CLICK, this.onClickByTargetElement.bind(this));
-
-        this.eventObserver.dispatch(new EventInitEnd({
-            cellContent: this.tableContentService.daysCellContent,
-            formattedDateShort: this.tableContentService.getFormattedDateShort()
-        }));
-
         this.eventObserver.on(EventNames.OPEN, this.onOpen.bind(this));
         this.eventObserver.on(EventNames.CLOSE, this.onClose.bind(this));
     }

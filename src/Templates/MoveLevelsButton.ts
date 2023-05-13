@@ -1,25 +1,30 @@
 import HTMLService from "../Services/HTMLService";
 import EventObserver from "../Services/EventObserver";
 import EventNames from "../Events/EventNames";
-import EventInitEnd from "../Events/EventInitEnd";
-import EventNextTableContent from "../Events/EventNextTableContent";
-import EventPrevTableContent from "../Events/EventPrevTableContent";
+import EventUpdateTableContent from "../Events/EventUpdateTableContent";
+import TableContentService from "../Services/TableContentService";
 
 export default class MoveLevelsButton extends HTMLService {
-    constructor(eventObserver: EventObserver) {
+    private tableContentService: TableContentService;
+
+    constructor(eventObserver: EventObserver, tableContentService: TableContentService) {
         super(eventObserver);
+        this.tableContentService = tableContentService;
 
         this.setStyles(`
             font-size: 18px;
             cursor: pointer;
         `);
 
-        this.eventObserver.on(EventNames.INIT_END, this.onChangeContent.bind(this));
-        this.eventObserver.on(EventNames.EVENT_NEXT_TABLE_CONTENT, this.onChangeContent.bind(this));
-        this.eventObserver.on(EventNames.EVENT_PREV_TABLE_CONTENT, this.onChangeContent.bind(this));
+        this.getElement.addEventListener(EventNames.CLICK, this.onClick.bind(this));
+        this.eventObserver.on(EventNames.EVENT_UPDATE_TABLE_CONTENT, this.onChangeContent.bind(this));
     }
 
-    private onChangeContent(event: EventInitEnd | EventNextTableContent | EventPrevTableContent): void {
+    private onClick(): void {
+        this.tableContentService.upLevel();
+    }
+
+    private onChangeContent(event: EventUpdateTableContent): void {
         const date = event.data.formattedDateShort;
 
         if (!date) {

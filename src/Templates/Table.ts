@@ -1,19 +1,19 @@
-import DayCell from "./DayCell";
+import Cell from "./Cell";
 import HTMLService from "../Services/HTMLService";
 import EventObserver from "../Services/EventObserver";
 import EventNames from "../Events/EventNames";
-import EventInitEnd from "../Events/EventInitEnd";
 import {CellData} from "../Interfaces";
-import EventNextTableContent from "../Events/EventNextTableContent";
-import EventPrevTableContent from "../Events/EventPrevTableContent";
-import EventUpLevelContent from "../Events/EventUpLevelContent";
-import EventDownLevelContent from "../Events/EventDownLevelContent";
+import EventUpdateTableContent from "../Events/EventUpdateTableContent";
+import TableContentService from "../Services/TableContentService";
 
 export default class Table extends HTMLService {
     private cells: HTMLElement[] = [];
+    private tableContentService: TableContentService;
 
-    constructor(eventObserver: EventObserver) {
+    constructor(eventObserver: EventObserver, tableContentService: TableContentService) {
         super(eventObserver);
+
+        this.tableContentService = tableContentService;
 
         this.setStyles(`
             display: flex;
@@ -22,12 +22,10 @@ export default class Table extends HTMLService {
             align-items: center;
         `);
 
-        this.eventObserver.on(EventNames.INIT_END, this.onChangeContent.bind(this));
-        this.eventObserver.on(EventNames.EVENT_NEXT_TABLE_CONTENT, this.onChangeContent.bind(this));
-        this.eventObserver.on(EventNames.EVENT_PREV_TABLE_CONTENT, this.onChangeContent.bind(this));
+        this.eventObserver.on(EventNames.EVENT_UPDATE_TABLE_CONTENT, this.onChangeContent.bind(this));
     }
 
-    private onChangeContent(event: EventInitEnd | EventNextTableContent | EventPrevTableContent): void {
+    private onChangeContent(event: EventUpdateTableContent): void {
         const content: CellData[] = event.data.cellContent;
 
         if (!content || content.length <= 0) {
@@ -40,8 +38,9 @@ export default class Table extends HTMLService {
 
         for (let i: number = 0; i < content.length; i++) {
             this.cells.push(
-                new DayCell(
+                new Cell(
                     this.eventObserver,
+                    this.tableContentService,
                     content[i]
                 ).getElement
             );

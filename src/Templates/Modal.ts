@@ -29,7 +29,7 @@ export default class Modal extends HTMLService {
 
         this.header = new Header(eventObserver);
         this.controls = new Controls(eventObserver, tableContentService);
-        this.table = new Table(eventObserver);
+        this.table = new Table(eventObserver, tableContentService);
 
         this.setStyles(`
             font-family: RobotoLightDP, Arial, sans-serif;

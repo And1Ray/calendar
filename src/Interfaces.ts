@@ -2,7 +2,8 @@ export interface CellData {
     name: string,
     day?: number,
     index: number,
-    mark: string
+    mark: string,
+    level: Levels
 }
 
 export enum Mark {
@@ -10,4 +11,10 @@ export enum Mark {
     PREV = 'prev',
     NEXT = 'next',
     TITLE = 'title'
+}
+
+export enum Levels {
+    DAYS,
+    MONTHS,
+    YEARS
 }

@@ -45,14 +45,11 @@ export default class EventObserver {
 
     private getSupportedListeners(): string[] {
         return [
-            EventNames.INIT_END,
+            EventNames.CLICK,
             EventNames.OPEN,
             EventNames.CLOSE,
             EventNames.TIMEUPDATE,
-            EventNames.EVENT_NEXT_TABLE_CONTENT,
-            EventNames.EVENT_PREV_TABLE_CONTENT,
-            EventNames.EVENT_UP_LEVEL_CONTENT,
-            EventNames.EVENT_DOWN_TABLE_CONTENT
+            EventNames.EVENT_UPDATE_TABLE_CONTENT
         ]
     }
 }

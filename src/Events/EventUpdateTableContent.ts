@@ -1,8 +1,8 @@
 import EventNames from "./EventNames";
 import EventService from "../Services/EventService";
 
-export default class EventDownLevelContent extends EventService {
+export default class EventUpdateTableContent extends EventService {
     constructor(data?: any) {
-        super(EventNames.EVENT_DOWN_TABLE_CONTENT, data);
+        super(EventNames.EVENT_UPDATE_TABLE_CONTENT, data);
     }
 }

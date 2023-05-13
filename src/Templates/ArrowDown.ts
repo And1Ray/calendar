@@ -27,6 +27,6 @@ export default class ArrowDown extends HTMLService {
     }
 
     private onClick(): void {
-        this.tableContentService.nextMonthDays();
+        this.tableContentService.nextTable();
     }
 }

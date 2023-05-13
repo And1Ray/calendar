@@ -1,6 +1,7 @@
 import {DEL_SHORT_DATE_SIGN} from "../Constants";
 import DateTimeFormatService from "./DateTimeFormatService";
 import EventObserver from "./EventObserver";
+import {Levels} from "../Interfaces";
 
 export default class DateShortService {
     private dateTimeFormat: DateTimeFormatService;
@@ -9,7 +10,7 @@ export default class DateShortService {
         this.dateTimeFormat = new DateTimeFormatService();
     }
 
-    public getFormattedDateShort(date: Date = new Date()): string {
+    public getFormattedDateShort(date: Date = new Date(), level: Levels = Levels.DAYS): string {
         const dateFormatShort: Intl.DateTimeFormat = this.dateTimeFormat.getDateFormatter({
             month: 'long',
             year: 'numeric'
