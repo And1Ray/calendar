@@ -7,6 +7,7 @@ To connect, take our bundle and instantiate it in your code by passing the insta
 ## Installation
 To install PowerDatepicker in your project, simply add the following script tag to your HTML file:
 
+[bundle.js](https://github.com/And1Ray/calendar/blob/master/dist/bundle.js)
 ```html
 <script type="module" src="path/bundle.js"></script>
 ```
