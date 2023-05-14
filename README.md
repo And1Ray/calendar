@@ -23,7 +23,7 @@ const datepicker = new PowerDatepicker(btn);
 const onOpen = (event) => {
     console.log('Open outside', event)
 }
-datepicker.addEventListener('opens', onOpen)
+datepicker.addEventListener('open', onOpen)
 datepicker.removeEventListener('open', onOpen)
 ```
 
