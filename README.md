@@ -33,7 +33,7 @@ datepicker.removeEventListener('open', onOpen)
 
 **close** - triggered when the calendar is closed (the calendar is also closed when clicking outside the area)
 
-**timeupdate** - triggered every second on table content update
+**timeupdate** - triggers every second for time update
 
 **eventupdatetablecontent** - triggered when table content is updated
 
