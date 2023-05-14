@@ -16,7 +16,7 @@ export default class DaysContentService {
         const firstDaysPosition: number = weekdays.findIndex((item: CellData): boolean => days[0].index === item.index);
         if (firstDaysPosition > 0) {
             const prevMonthDays: CellData[] = this.getDatesInMonth(currentYear, currentMonth - 1, Mark.PREV);
-            days = [...prevMonthDays.slice((prevMonthDays.length - 1) - firstDaysPosition), ...days];
+            days = [...prevMonthDays.slice((prevMonthDays.length) - firstDaysPosition), ...days];
         }
 
         const lastDaysLength: number = LENGTH_DAY_CELLS - days.length;

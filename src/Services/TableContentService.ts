@@ -7,6 +7,7 @@ import MonthsContentService from "./MonthsContentService";
 import YearsContentService from "./YearsContentService";
 import EventUpdateTableContent from "../Events/EventUpdateTableContent";
 import {CELLS_MONTHS_AND_YEARS_LENGTH} from "../Constants";
+import EventNames from "../Events/EventNames";
 
 export default class TableContentService {
     private readonly eventObserver: EventObserver;
@@ -22,15 +23,21 @@ export default class TableContentService {
 
     constructor(eventObserver: EventObserver) {
         this.eventObserver = eventObserver;
-        this.dateShortService = new DateShortService(this.eventObserver);
+        this.dateShortService = new DateShortService();
         this.dateTimeFormat = new DateTimeFormatService();
 
         this.daysContentService = new DaysContentService(this.dateTimeFormat);
         this.monthContentService = new MonthsContentService(this.dateTimeFormat);
         this.yearsContentService = new YearsContentService(this.dateTimeFormat);
+
+        this.eventObserver.on(EventNames.CLOSE, this.onClose.bind(this));
     }
 
-    public init() {
+    private onClose(): void {
+        this.init();
+    }
+
+    public init(): void {
         this.getCurrentParams();
         this.levelSelection(this.currentLevelIndex);
     }
@@ -45,11 +52,16 @@ export default class TableContentService {
 
     public nextTable(): void {
         if (this.currentLevelIndex === Levels.DAYS) {
-            this.currentMonth = this.currentMonth + 1;
+            this.currentMonth += 1;
+
+            if (this.currentMonth > 11) {
+                this.currentMonth = 0;
+                this.currentYear += 1;
+            }
         }
 
         if (this.currentLevelIndex === Levels.MONTHS) {
-            this.currentMonth = this.currentMonth + CELLS_MONTHS_AND_YEARS_LENGTH;
+            this.currentYear += 1;
         }
 
         if (this.currentLevelIndex === Levels.YEARS) {
@@ -61,11 +73,16 @@ export default class TableContentService {
 
     public prevTable(): void {
         if (this.currentLevelIndex === Levels.DAYS) {
-            this.currentMonth = this.currentMonth - 1;
+            this.currentMonth -= 1;
+
+            if (this.currentMonth < 0) {
+                this.currentMonth = 11;
+                this.currentYear -= 1;
+            }
         }
 
         if (this.currentLevelIndex === Levels.MONTHS) {
-            this.currentMonth = this.currentMonth - CELLS_MONTHS_AND_YEARS_LENGTH;
+            this.currentYear -= 1;
         }
 
         if (this.currentLevelIndex === Levels.YEARS) {
