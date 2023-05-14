@@ -2,10 +2,15 @@ import HTMLService from "../Services/HTMLService";
 import EventObserver from "../Services/EventObserver";
 import EventNames from "../Events/EventNames";
 import EventTimeupdate from "../Events/EventTimeupdate";
+import TableContentService from "../Services/TableContentService";
 
 export default class Date extends HTMLService {
-    constructor(eventObserver: EventObserver) {
+    private tableContentService: TableContentService;
+
+    constructor(eventObserver: EventObserver, tableContentService: TableContentService) {
         super(eventObserver);
+
+        this.tableContentService = tableContentService;
 
         this.setStyles(`
             width: 100%;
@@ -14,7 +19,12 @@ export default class Date extends HTMLService {
             cursor: pointer;
         `);
 
+        this.getElement.addEventListener(EventNames.CLICK, this.onClick.bind(this));
         this.eventObserver.on(EventNames.TIMEUPDATE, this.onTimeupdate.bind(this));
+    }
+
+    private onClick(): void {
+        this.tableContentService.init();
     }
 
     private onTimeupdate(event: EventTimeupdate): void {

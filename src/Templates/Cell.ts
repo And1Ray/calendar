@@ -42,7 +42,7 @@ export default class Cell extends HTMLService {
                 cursor: pointer;
                 width: 82px;
                 height: 70px;
-                color: #E0E0E0;
+                color: ${color};
             `);
         }
 

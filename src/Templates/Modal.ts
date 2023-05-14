@@ -27,7 +27,7 @@ export default class Modal extends HTMLService {
         this.coords = coords;
         this.parentElement = parentElement;
 
-        this.header = new Header(eventObserver);
+        this.header = new Header(eventObserver, tableContentService);
         this.controls = new Controls(eventObserver, tableContentService);
         this.table = new Table(eventObserver, tableContentService);
 
