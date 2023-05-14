@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",(()=>{const e=document.getElementById("btn");new PowerDatepicker(e)}));
