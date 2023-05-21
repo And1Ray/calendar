@@ -9,7 +9,7 @@ export default class MonthsContentService {
         this.dateTimeFormat = dateTimeFormat;
     }
 
-    public getMonths(currentYear: number, currentMonth: number): CellData[] {
+    public getMonths(currentYear: number): CellData[] {
         const months: CellData[] = [];
 
         for (let i: number = 0; i < CELLS_MONTHS_AND_YEARS_LENGTH; i++) {

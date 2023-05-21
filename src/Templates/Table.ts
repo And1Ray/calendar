@@ -5,24 +5,26 @@ import EventNames from "../Events/EventNames";
 import {CellData} from "../Interfaces";
 import EventUpdateTableContent from "../Events/EventUpdateTableContent";
 import TableContentService from "../Services/TableContentService";
+import EventClickFromDate from "../Events/EventClickFromDate";
 
 export default class Table extends HTMLService {
-    private cells: HTMLElement[] = [];
-    private tableContentService: TableContentService;
+    private cellsInstances: Cell[] = [];
+    private readonly tableContentService: TableContentService;
 
     constructor(eventObserver: EventObserver, tableContentService: TableContentService) {
         super(eventObserver);
 
         this.tableContentService = tableContentService;
 
-        this.setStyles(`
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-        `);
+        this.addCustomStyles({
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            alignItems: 'center'
+        });
 
-        this.eventObserver.on(EventNames.EVENT_UPDATE_TABLE_CONTENT, this.onChangeContent.bind(this));
+        this.eventObserver.on(EventNames.UPDATE_TABLE_CONTENT, this.onChangeContent.bind(this));
+        this.eventObserver.on(EventNames.CLICK_FROM_DATE, this.onClickFromDate.bind(this));
     }
 
     private onChangeContent(event: EventUpdateTableContent): void {
@@ -33,19 +35,33 @@ export default class Table extends HTMLService {
         }
 
         if (this.getElement.childElementCount > 0) {
-            this.cells = [];
+            this.cellsInstances = [];
         }
 
         for (let i: number = 0; i < content.length; i++) {
-            this.cells.push(
-                new Cell(
-                    this.eventObserver,
-                    this.tableContentService,
-                    content[i]
-                ).getElement
+            const cellInstance: Cell = new Cell(
+                this.eventObserver,
+                this.tableContentService,
+                content[i]
             );
+
+            this.cellsInstances.push(cellInstance);
         }
 
-        this.insertElements(this.cells);
+        this.renderContent();
+    }
+
+    private onClickFromDate(event: EventClickFromDate): void {
+        this.cellsInstances.forEach(item => {
+            if (event.data.element !== item.getElement) {
+                item.clearOutlineCell();
+            }
+        });
+
+        this.renderContent();
+    }
+
+    private renderContent(): void {
+        this.insertElements(this.cellsInstances.map(item => item.getElement));
     }
 }

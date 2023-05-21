@@ -6,7 +6,7 @@ import DateShortService from "./DateShortService";
 import MonthsContentService from "./MonthsContentService";
 import YearsContentService from "./YearsContentService";
 import EventUpdateTableContent from "../Events/EventUpdateTableContent";
-import {CELLS_MONTHS_AND_YEARS_LENGTH} from "../Constants";
+import {CELLS_MONTHS_AND_YEARS_LENGTH, LENGTH_OF_MONTHS} from "../Constants";
 import EventNames from "../Events/EventNames";
 
 export default class TableContentService {
@@ -18,6 +18,7 @@ export default class TableContentService {
     private dateShortService: DateShortService;
     private currentYear: number;
     private currentMonth: number;
+    private nowDate: string;
     private currentLevelIndex: number;
     private formattedDateShort: string;
 
@@ -47,6 +48,7 @@ export default class TableContentService {
         const date: Date = new Date();
         this.currentYear = date.getFullYear();
         this.currentMonth = date.getMonth();
+        this.nowDate = `${date.getDate()}.${this.currentMonth}.${this.currentYear}`;
         this.formattedDateShort = this.dateShortService.getFormattedDateShort();
     }
 
@@ -54,7 +56,7 @@ export default class TableContentService {
         if (this.currentLevelIndex === Levels.DAYS) {
             this.currentMonth += 1;
 
-            if (this.currentMonth > 11) {
+            if (this.currentMonth > LENGTH_OF_MONTHS) {
                 this.currentMonth = 0;
                 this.currentYear += 1;
             }
@@ -76,7 +78,7 @@ export default class TableContentService {
             this.currentMonth -= 1;
 
             if (this.currentMonth < 0) {
-                this.currentMonth = 11;
+                this.currentMonth = LENGTH_OF_MONTHS;
                 this.currentYear -= 1;
             }
         }
@@ -92,7 +94,7 @@ export default class TableContentService {
         this.levelSelection(this.currentLevelIndex);
     }
 
-    public upLevel() {
+    public upLevel(): void {
         if (this.currentLevelIndex >= Levels.YEARS) {
             return;
         }
@@ -101,7 +103,7 @@ export default class TableContentService {
         this.levelSelection(this.currentLevelIndex);
     }
 
-    public downLevel(data: CellData) {
+    public downLevel(data: CellData): void {
         if (this.currentLevelIndex <= Levels.DAYS) {
             return;
         }
@@ -120,11 +122,11 @@ export default class TableContentService {
         this.levelSelection(this.currentLevelIndex);
     }
 
-    private levelSelection(level: number) {
+    private levelSelection(level: number): void {
         switch (level) {
             case Levels.MONTHS:
                 this.triggerEvent(
-                    this.monthContentService.getMonths(this.currentYear, this.currentMonth),
+                    this.monthContentService.getMonths(this.currentYear),
                     Levels.MONTHS
                 );
                 break;
@@ -136,13 +138,13 @@ export default class TableContentService {
                 break;
             default:
                 this.triggerEvent(
-                    this.daysContentService.getDays(this.currentYear, this.currentMonth),
+                    this.daysContentService.getDays(this.currentYear, this.currentMonth, this.nowDate),
                     Levels.DAYS
                 );
         }
     }
 
-    private triggerEvent(cellContent: CellData[], level: Levels) {
+    private triggerEvent(cellContent: CellData[], level: Levels): void {
         this.eventObserver.dispatch(new EventUpdateTableContent({
             cellContent,
             formattedDateShort: this.dateShortService.getFormattedDateShort(

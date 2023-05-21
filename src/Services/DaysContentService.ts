@@ -9,19 +9,19 @@ export default class DaysContentService {
         this.dateTimeFormat = dateTimeFormat;
     }
 
-    public getDays(currentYear: number, currentMonth: number): CellData[] {
+    public getDays(year: number, month: number, now?: string): CellData[] {
         const weekdays: CellData[] = this.getWeekdays()
-        let days: CellData[] = this.getDatesInMonth(currentYear, currentMonth, Mark.CURRENT);
+        let days: CellData[] = this.getDatesInMonth(year, month, Mark.CURRENT, now);
 
         const firstDaysPosition: number = weekdays.findIndex((item: CellData): boolean => days[0].index === item.index);
         if (firstDaysPosition > 0) {
-            const prevMonthDays: CellData[] = this.getDatesInMonth(currentYear, currentMonth - 1, Mark.PREV);
+            const prevMonthDays: CellData[] = this.getDatesInMonth(year, month - 1, Mark.PREV);
             days = [...prevMonthDays.slice((prevMonthDays.length) - firstDaysPosition), ...days];
         }
 
         const lastDaysLength: number = LENGTH_DAY_CELLS - days.length;
         if (lastDaysLength > 0) {
-            const nextMonthDays: CellData[] = this.getDatesInMonth(currentYear, currentMonth + 1, Mark.NEXT);
+            const nextMonthDays: CellData[] = this.getDatesInMonth(year, month + 1, Mark.NEXT);
             days = [...days, ...nextMonthDays.slice(0, lastDaysLength)]
         }
 
@@ -50,7 +50,7 @@ export default class DaysContentService {
         return [...weekdays.slice(1), weekdays[0]];
     }
 
-    private getDatesInMonth(year: number, month: number, mark: string): CellData[] {
+    private getDatesInMonth(year: number, month: number, mark: string, now?: string): CellData[] {
         const formatterWeekday: Intl.DateTimeFormat = this.dateTimeFormat.getDateFormatter({weekday: 'short'});
         const daysInMonthLength: number = new Date(year, month + 1, 0).getDate();
         const days = [];
@@ -59,8 +59,10 @@ export default class DaysContentService {
             days.push({
                 name: formatterWeekday.formatToParts(date)[0].value,
                 day: i,
+                month,
+                year,
                 index: date.getDay(),
-                mark,
+                mark: `${i}.${month}.${year}` === now ? Mark.NOW : mark,
                 level: Levels.DAYS
             })
         }

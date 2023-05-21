@@ -30,6 +30,12 @@ datepicker.removeEventListener('open', onOpen)
 
 ### List of events that can be handled:
 
+
+The event argument has the following type:
+```javascript
+event: eventName: string, data?: any
+```
+
 **open** - triggered when the calendar is opened
 
 **close** - triggered when the calendar is closed (the calendar is also closed when clicking outside the area)
@@ -37,6 +43,8 @@ datepicker.removeEventListener('open', onOpen)
 **timeupdate** - triggers every second for time update
 
 **eventupdatetablecontent** - triggered when table content is updated
+
+**clickfromdate** - this is called when a click event occurs on a day cell
 
 ### Additions:
 

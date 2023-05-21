@@ -1,6 +1,7 @@
 import EventObserver from "./EventObserver";
+import {Styles} from "../Interfaces";
 
-export default abstract class HTMLService {
+export default class HTMLService {
     private element: HTMLElement;
     public readonly eventObserver: EventObserver;
 
@@ -17,8 +18,10 @@ export default abstract class HTMLService {
         return this.element;
     }
 
-    protected setStyles(cssText: string): void {
-        this.getElement.style.cssText = cssText;
+    protected addCustomStyles(styles: Styles): void {
+        for (const stylesKey in styles) {
+            (this.getElement.style as any)[stylesKey] = styles[stylesKey];
+        }
     }
 
     protected setContent(textContent: string): void {
