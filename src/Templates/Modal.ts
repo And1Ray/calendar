@@ -31,18 +31,18 @@ export default class Modal extends HTMLService {
         this.controls = new Controls(eventObserver, tableContentService);
         this.table = new Table(eventObserver, tableContentService);
 
-        this.setStyles(`
-            font-family: RobotoLightDP, Arial, sans-serif;
-            width: 360px;
-            position: absolute;
-            background-color: #3B3C3C;
-            left: ${this.coords?.x}px;
-            top: ${this.coords?.y}px;
-            display: block;
-            margin-top: 4px;
-            padding-bottom: 26px;
-            border-radius: 4px;
-        `);
+        this.addCustomStyles({
+            fontFamily: 'RobotoLightDP, Arial, sans-serif',
+            width: '360px',
+            position: 'absolute',
+            backgroundColor: '#3B3C3C',
+            left: `${this.coords?.x}px`,
+            top: `${this.coords?.y}px`,
+            display: 'block',
+            marginTop: '4px',
+            paddingBottom: '26px',
+            borderRadius: '4px'
+        });
 
         this.insertElements([
             this.header.getElement,

@@ -14,14 +14,14 @@ export default class Controls extends HTMLService {
         this.moveLevelsButton = new MoveLevelsButton(eventObserver, tableContentService);
         this.arrows = new Arrows(eventObserver, tableContentService);
 
-        this.setStyles(`
-            color: #B7B7B7;
-            height: 45px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 26px;
-        `);
+        this.addCustomStyles({
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            height: '45px',
+            color: '#B7B7B7',
+            padding: '0 26px'
+        });
 
         this.insertElements([this.moveLevelsButton.getElement, this.arrows.getElement]);
     }

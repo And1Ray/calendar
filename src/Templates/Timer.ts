@@ -9,11 +9,11 @@ export default class Timer extends HTMLService {
 
         this.eventObserver.on(EventNames.TIMEUPDATE, this.onTimeupdate.bind(this));
 
-        this.setStyles(`
-            width: 100%;
-            font-size: 36px;
-            color: #E5E5E5;
-        `);
+        this.addCustomStyles({
+            width: '100%',
+            fontSize: '36px',
+            color: '#E5E5E5'
+        });
 
         this.setContent('21:33:26');
     }

@@ -11,13 +11,13 @@ export default class MoveLevelsButton extends HTMLService {
         super(eventObserver);
         this.tableContentService = tableContentService;
 
-        this.setStyles(`
-            font-size: 18px;
-            cursor: pointer;
-        `);
+        this.addCustomStyles({
+            fontSize: '18px',
+            cursor: 'pointer'
+        });
 
         this.getElement.addEventListener(EventNames.CLICK, this.onClick.bind(this));
-        this.eventObserver.on(EventNames.EVENT_UPDATE_TABLE_CONTENT, this.onChangeContent.bind(this));
+        this.eventObserver.on(EventNames.UPDATE_TABLE_CONTENT, this.onChangeContent.bind(this));
     }
 
     private onClick(): void {

@@ -14,12 +14,12 @@ export default class Header extends HTMLService {
         this.timer = new Timer(eventObserver);
         this.date = new Date(eventObserver, tableContentService);
 
-        this.setStyles(`
-            border-bottom: 1px solid #575858;
-            padding-top: 26px;
-            padding-left: 26px;
-            padding-bottom: 23px;
-        `);
+        this.addCustomStyles({
+            borderBottom: '1px solid #575858',
+            paddingTop: '26px',
+            paddingLeft: '26px',
+            paddingBottom: '23px'
+        });
 
         this.insertElements([this.timer.getElement, this.date.getElement]);
     }

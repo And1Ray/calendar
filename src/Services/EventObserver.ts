@@ -49,7 +49,8 @@ export default class EventObserver {
             EventNames.OPEN,
             EventNames.CLOSE,
             EventNames.TIMEUPDATE,
-            EventNames.EVENT_UPDATE_TABLE_CONTENT
+            EventNames.UPDATE_TABLE_CONTENT,
+            EventNames.CLICK_FROM_DATE
         ]
     }
 }

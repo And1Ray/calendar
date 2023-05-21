@@ -12,12 +12,12 @@ export default class Date extends HTMLService {
 
         this.tableContentService = tableContentService;
 
-        this.setStyles(`
-            width: 100%;
-            font-size: 16px;
-            color: #9AB3CA;
-            cursor: pointer;
-        `);
+        this.addCustomStyles({
+            width: '100%',
+            fontSize: '16px',
+            color: '#9AB3CA',
+            cursor: 'pointer'
+        });
 
         this.getElement.addEventListener(EventNames.CLICK, this.onClick.bind(this));
         this.eventObserver.on(EventNames.TIMEUPDATE, this.onTimeupdate.bind(this));
