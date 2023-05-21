@@ -25,9 +25,6 @@ export default class Table extends HTMLService {
 
         this.eventObserver.on(EventNames.UPDATE_TABLE_CONTENT, this.onChangeContent.bind(this));
         this.eventObserver.on(EventNames.CLICK_FROM_DATE, this.onClickFromDate.bind(this));
-
-        // this.getElement.addEventListener(EventNames.MOUSEOVER, this.onMouseOver.bind(this));
-        // this.getElement.addEventListener(EventNames.MOUSEOUT, this.onMouseOut.bind(this));
     }
 
     private onChangeContent(event: EventUpdateTableContent): void {
