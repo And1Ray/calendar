@@ -1,6 +1,13 @@
 import {CellData, Levels, Mark} from "../Interfaces";
-import {LENGTH_DAY_CELLS, LENGTH_OF_DAYS} from "../Constants";
+import {
+    FIRST_DAY_OF_WEEK_DEFAULT,
+    FIRST_DAY_OF_WEEK_WITHOUT_MONDAY,
+    LENGTH_DAY_CELLS,
+    LENGTH_OF_DAYS
+} from "../Constants";
 import DateTimeFormatService from "./DateTimeFormatService";
+
+type WeekDays = 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday' | 'Sunday';
 
 export default class DaysContentService {
     private dateTimeFormat: DateTimeFormatService;
@@ -10,7 +17,7 @@ export default class DaysContentService {
     }
 
     public getDays(year: number, month: number, now?: string): CellData[] {
-        const weekdays: CellData[] = this.getWeekdays()
+        const weekdays: CellData[] = this.getWeekdays();
         let days: CellData[] = this.getDatesInMonth(year, month, Mark.CURRENT, now);
 
         const firstDaysPosition: number = weekdays.findIndex((item: CellData): boolean => days[0].index === item.index);
@@ -29,6 +36,11 @@ export default class DaysContentService {
     }
 
     private getWeekdays(): CellData[] {
+        const locale = this.dateTimeFormat.getLocale();
+        const firstDayOfWeek: number = FIRST_DAY_OF_WEEK_WITHOUT_MONDAY.has(locale)
+            ? FIRST_DAY_OF_WEEK_WITHOUT_MONDAY.get(locale) as number
+            : FIRST_DAY_OF_WEEK_DEFAULT;
+
         const firstDayOfMonth: Date = new Date();
         firstDayOfMonth.setDate(1);
         const firstWeekday: number = firstDayOfMonth.getDay();
@@ -47,8 +59,9 @@ export default class DaysContentService {
                 };
             });
 
-        return [...weekdays.slice(1), weekdays[0]];
+        return [...weekdays.slice(firstDayOfWeek), ...weekdays.slice(0, firstDayOfWeek)];
     }
+
 
     private getDatesInMonth(year: number, month: number, mark: string, now?: string): CellData[] {
         const formatterWeekday: Intl.DateTimeFormat = this.dateTimeFormat.getDateFormatter({weekday: 'short'});

@@ -11,7 +11,7 @@ export default class DateTimeFormatService {
         return new Intl.DateTimeFormat(this.clientLocale, opts);
     }
 
-    private getLocale(): string {
+    public getLocale(): string {
         return (
             navigator.languages.find(item => {
                 let node: string[] = item.toLowerCase().split('-');
